@@ -1,0 +1,3 @@
+[submodule "Dependencies/Utility"]
+	path = Dependencies/Utility
+	url = git://github.com/TiagoRabello/Utility.git
