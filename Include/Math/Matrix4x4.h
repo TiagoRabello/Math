@@ -7,6 +7,7 @@
 
 #include <array>
 #include <cmath>
+#include <utility>
 
 namespace Math
 {
@@ -27,6 +28,7 @@ namespace Math
     using const_reference = value_type;
     using pointer         = value_type*;
     using const_pointer   = const pointer;
+    using index_pair_type = std::pair< size_type, size_type >;
     
     static constexpr BasicMatrix4x4 Identity = { { Number( 1 ), Number( 0 ), Number( 0 ), Number( 0 ),
                                                    Number( 0 ), Number( 1 ), Number( 0 ), Number( 0 ),
@@ -44,6 +46,9 @@ namespace Math
           reference operator[]( size_type index );
     const_reference operator[]( size_type index ) const;
 
+          reference operator[]( index_pair_type index );
+    const_reference operator[]( index_pair_type index ) const;
+          
           pointer data( );
     const_pointer data( ) const;
   };
@@ -72,7 +77,10 @@ namespace Math
   // Transformation Functions 
   /////////////////////////////////////////////////////////////////////////////
   template< typename Number >
-  constexpr BasicMatrix4x4< Number > Transposed( const BasicMatrix4x4< Number >& matrix );
+  BasicMatrix4x4< Number > Transposed( BasicMatrix4x4< Number > matrix );
+
+  template< typename Number >
+  BasicMatrix4x4< Number > Inversed( BasicMatrix4x4< Number > matrix );
 
   Matrix4x4 TranslationMatrix( Vector3D direction );
   Matrix4x4 ScaleMatrix( float dx, float dy, float dz );
